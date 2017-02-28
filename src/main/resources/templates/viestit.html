@@ -1,0 +1,79 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Viestejä</title>
+        <meta charset="utf-8"/>
+        <style>
+            th {
+                text-align: left;
+            }
+            ul li {
+                float:left;
+            }
+            p {
+                color: #e06f18;
+            }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow:hidden;
+                background-color:transparent;
+            }
+            body{
+                background: url("http://i.imgur.com/WtNoqfH.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            li a{
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 10px;
+                text-decoration: none;
+                background-color:black;
+            }
+            li a:hover{
+                background-color: #e06f18;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <h3><a th:href="@{~/alueet}">Alue:</a>
+            <span>
+                 
+                <a th:href="@{~/alueet/{a_id}(a_id=${alue.id})}" th:text="${alue.nimi}">a</a>
+            </span><span> &rarr;</span> 
+            <span th:text="${keskustelu.otsikko}">
+                jg
+            </span>
+        </h3>
+
+        <ol th:start="${startingpoint}">
+            <li th:each="viesti: ${viestit}">
+                <span th:text="${viesti.sisalto}">j</span> <span> t. </span><span th:text="${viesti.lahettaja}"> aivan </span>
+            </li>
+        </ol>
+        
+
+        <form method="POST">
+            <p>Lisää viesti:</p>
+            <textarea cols="50" rows="4" name="sisalto"></textarea>
+            <p>Lähettäjä:</p>            
+            <input type="text" name="lahettaja"/>
+            <input type="submit" value="Lähetä!"/>
+        </form>
+
+        <ul style="white-space:nowrap">
+            <li th:each="sivu: ${sivut}">
+                <a th:href="@{~/alueet/{a_id}/{k_id}/{sivu} (a_id=${alue.id},k_id=${keskustelu.id},sivu=${sivu})}" th:text="${sivu}">sivu</a>
+            </li>
+        </ul>
+    </body>
+</html>

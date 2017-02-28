@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Foorumi</title>
+        <meta charset="utf-8"/>        
+        <style>
+            th {
+                text-align: left;
+            }
+            body{
+                background: url("http://i.imgur.com/WtNoqfH.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Raivokaivofoorumi</h1>
+
+
+        <table style="width:50%">
+            <tr>
+                <th>Alue</th>
+                <th>Viestejä yhteensä</th>
+                <th>Viimeisin viesti</th>
+            </tr>
+            <th:block th:each="alue : ${alueet}">
+                <tr>
+                    <td>
+                        <a th:href="@{~/alueet/{a_id}(a_id=${alue.id})}" th:text="${alue.nimi}">nimi</a>
+                    </td>
+                    <td th:text="${alue.viestit}">viestit</td>
+                    <td th:text="${alue.aikaleima}">leima</td>
+                </tr>
+            </th:block>
+        </table>
+        <form method="POST">
+            <input type="text" name="nimi"/>
+            <input type="submit" value="Lisää alue!"/>
+        </form>
+        <img src="http://bestanimations.com/Humans/Skeletons/skeleton-animated-gif-20.gif" alt="Mountain View" style="width:600px;height:500px;"/>
+    </body>
+</html>
