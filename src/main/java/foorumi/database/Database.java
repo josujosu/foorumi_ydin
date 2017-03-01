@@ -119,7 +119,7 @@ public class Database {
         // tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
         lista.add("CREATE TABLE Alue (id integer PRIMARY KEY, nimi varchar (70) NOT NULL UNIQUE, aikaleima datetime);");
         lista.add("CREATE TABLE Keskustelu (id integer PRIMARY KEY, aikaleima datetime, otsikko varchar (70) NOT NULL UNIQUE, alue integer NOT NULL,  FOREIGN KEY(alue) REFERENCES Alue(id));");
-        lista.add("CREATE TABLE Viesti (id integer PRIMARY KEY, sisalto varchar NOT NULL, keskustelu integer NOT NULL, lahettaja varchar(40), FOREIGN KEY (keskustelu) REFERENCES  Keskustelu(id));");
+        lista.add("CREATE TABLE Viesti (id integer PRIMARY KEY, sisalto varchar(200) NOT NULL, keskustelu integer NOT NULL, lahettaja varchar(40), FOREIGN KEY (keskustelu) REFERENCES  Keskustelu(id));");
 
         return lista;
     }

@@ -7,6 +7,7 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Viestejä</title>
+        <link rel="shortcut icon" type="image/x-icon" href="Favicon.ico" />
         <meta charset="utf-8"/>
         <style>
             th {
@@ -42,12 +43,12 @@ and open the template in the editor.
                 background-color: #e06f18;
             }
         </style>
-        
+
     </head>
     <body>
         <h3><a th:href="@{~/alueet}">Alue:</a>
             <span>
-                 
+
                 <a th:href="@{~/alueet/{a_id}(a_id=${alue.id})}" th:text="${alue.nimi}">a</a>
             </span><span> &rarr;</span> 
             <span th:text="${keskustelu.otsikko}">
@@ -60,7 +61,7 @@ and open the template in the editor.
                 <span th:text="${viesti.sisalto}">j</span> <span> t. </span><span th:text="${viesti.lahettaja}"> aivan </span>
             </li>
         </ol>
-        
+
 
         <form method="POST">
             <p>Lisää viesti:</p>
