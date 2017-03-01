@@ -38,8 +38,8 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         } else {
             this.db.update("INSERT INTO Viesti(sisalto, keskustelu, lahettaja) VALUES(?,?,?);", viesti.getSisalto(), viesti.getKeskustelu(), viesti.getLahettaja());
         }
-        this.db.update("UPDATE Keskustelu SET aikaleima = (datetime('now', 'localtime')) WHERE id = ?", viesti.getKeskustelu());
-        this.db.update("UPDATE Alue SET aikaleima = (datetime('now', 'localtime')) WHERE id = (SELECT alue FROM Keskustelu WHERE id = ?)", viesti.getKeskustelu());
+        this.db.update("UPDATE Keskustelu SET aikaleima = (datetime('now', 'localtime', '+2 hours')) WHERE id = ?", viesti.getKeskustelu());
+        this.db.update("UPDATE Alue SET aikaleima = (datetime('now', 'localtime', '+2 hours')) WHERE id = (SELECT alue FROM Keskustelu WHERE id = ?)", viesti.getKeskustelu());
     }
 
     @Override
