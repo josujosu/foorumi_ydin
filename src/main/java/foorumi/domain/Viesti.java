@@ -42,11 +42,33 @@ public class Viesti {
     public void setLahettaja(String lahettaja) {
         this.lahettaja = lahettaja;
     }
-    
-    
 
     public String getSisalto() {
         return sisalto;
+    }
+    
+    public String getShortsisalto() {
+        if (this.sisalto.length() > 200) {
+            StringBuilder uusi = new StringBuilder("");
+            for (int i = 0; i < 200; i++) {
+                uusi.append(this.sisalto.charAt(i));
+            }
+            uusi.append("...");
+            return uusi.toString();
+        }
+        return sisalto;
+    }
+
+    public String getShortlahettaja() {
+        if (this.lahettaja.length() > 40) {
+            StringBuilder uusi = new StringBuilder("");
+            for (int i = 0; i < 40; i++) {
+                uusi.append(this.lahettaja.charAt(i));
+            }
+            uusi.append("...");
+            return uusi.toString();
+        }
+        return lahettaja;
     }
 
     public void setId(Integer id) {

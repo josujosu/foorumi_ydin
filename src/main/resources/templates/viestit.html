@@ -58,7 +58,7 @@ and open the template in the editor.
 
         <ol th:start="${startingpoint}">
             <li th:each="viesti: ${viestit}">
-                <span th:text="${viesti.sisalto}">j</span> <span> t. </span><span th:text="${viesti.lahettaja}"> aivan </span>
+                <span th:text="${viesti.shortsisalto}">j</span> <span> t. </span><span th:text="${viesti.shortlahettaja}"> aivan </span>
             </li>
         </ol>
 
