@@ -22,7 +22,7 @@ public class Database {
         this.connection = DriverManager.getConnection(address);
         this.databaseAddress = address;
         
-        init();
+        //init();
     }
 
     public <T> List<T> queryAndCollect(String query, Collector<T> col, Object... params) throws SQLException {
