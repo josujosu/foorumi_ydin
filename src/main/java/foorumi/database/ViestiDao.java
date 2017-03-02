@@ -62,5 +62,12 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         List<Viesti> viestit = this.db.queryAndCollect("SELECT * FROM Viesti WHERE keskustelu = ? LIMIT 20 OFFSET (0 + ((? - 1) * 20))", new ViestiCollector(), kesk, sivu);
         return viestit;
     }
+    
+    public boolean onkoTarpeeksiSisaltoLyhyt(String sisalto){
+        if(sisalto.length() <= 200){
+            return true;
+        }
+        return false;
+    }
 
 }

@@ -33,7 +33,7 @@ and open the template in the editor.
             <th:block th:each="alue : ${alueet}">
                 <tr>
                     <td>
-                        <a th:href="@{~/alueet/{a_id}(a_id=${alue.id})}" th:text="${alue.nimi}">nimi</a>
+                        <a th:href="@{~/alueet/{a_id}(a_id=${alue.id})}" th:text="${alue.shortnimi}">nimi</a>
                     </td>
                     <td th:text="${alue.viestit}">viestit</td>
                     <td th:text="${alue.aikaleima}">leima</td>

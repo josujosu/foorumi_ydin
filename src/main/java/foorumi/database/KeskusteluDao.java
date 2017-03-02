@@ -56,6 +56,11 @@ public class KeskusteluDao implements Dao<Keskustelu, Integer> {
         List<Keskustelu> kesk = this.db.queryAndCollect("SELECT * FROM Keskustelu WHERE alue = ?", new KeskusteluCollector(), key);
         return kesk;
     }
+    
+    public Integer findIdWithOtsikko(String otsikko) throws SQLException {
+        List<Keskustelu> iideet = this.db.queryAndCollect("SELECT * FROM Keskustelu WHERE otsikko = ? ORDER BY id DESC", new KeskusteluCollector(), otsikko);
+        return iideet.get(0).getId();
+    }
 
     public Integer countViestit(Integer key) throws SQLException {
         Connection conn = DriverManager.getConnection("jdbc:sqlite:foorumi.db");

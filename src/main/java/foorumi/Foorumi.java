@@ -88,7 +88,7 @@ public class Foorumi {
 
         Spark.post("/alueet", (req, res) -> {
             String onkotyhja = req.queryParams("nimi").trim();
-            if (!onkotyhja.isEmpty()) {
+            if (!onkotyhja.isEmpty() && !alueDao.onkoSamojaNimia(onkotyhja)) {
                 alueDao.save(new Alue(onkotyhja));
             }
             res.redirect("/");
@@ -100,13 +100,15 @@ public class Foorumi {
             if (!onkotyhja.isEmpty()) {
                 keskusteluDao.save(new Keskustelu(onkotyhja, Integer.parseInt(req.params(":a_id"))));
             }
-            res.redirect("/alueet/" + req.params(":a_id"));
+            res.redirect("/alueet/" + req.params(":a_id") + "/" + keskusteluDao.findIdWithOtsikko(onkotyhja) + "/1");
             return "ok";
         });
 
         Spark.post("/alueet/:a_id/:k_id/:sivu", (req, res) -> {
-            viestiDao.save(new Viesti(req.queryParams("sisalto"), Integer.parseInt(req.params(":k_id")), req.queryParams("lahettaja")));
-            res.redirect("/alueet/" + req.params(":a_id") + "/" + req.params(":k_id") + "/" + req.params("sivu"));
+            if (viestiDao.onkoTarpeeksiSisaltoLyhyt(req.queryParams("sisalto"))) {
+                viestiDao.save(new Viesti(req.queryParams("sisalto"), Integer.parseInt(req.params(":k_id")), req.queryParams("lahettaja")));
+            }
+            res.redirect("/alueet/" + req.params(":a_id") + "/" + req.params(":k_id") + "/" + req.params(":sivu"));
             return "ok";
         });
     }

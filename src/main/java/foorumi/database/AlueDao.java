@@ -62,5 +62,16 @@ public class AlueDao implements Dao<Alue, Integer> {
         conn.close();
         return lkm;
     }
+    
+    public boolean onkoSamojaNimia(String nimi) throws SQLException {
+        List<Alue> alueet = this.findAll();
+        boolean onko = false;
+        for(Alue alue : alueet){
+            if(alue.getNimi().equals(nimi)){
+                onko = true;
+            }
+        }
+        return onko;
+    }
 
 }

@@ -15,17 +15,18 @@ import java.sql.Timestamp;
  * @author josujosu
  */
 public class Alue {
-    
+
     private Integer id;
     private String aikaleima;
     private String nimi;
-    
-    public Alue(Integer id, String nimi, String aikaleima){
+
+    public Alue(Integer id, String nimi, String aikaleima) {
         this.id = id;
         this.aikaleima = aikaleima;
         this.nimi = nimi;
     }
-    public Alue(String nimi){
+
+    public Alue(String nimi) {
         this(null, nimi, null);
     }
 
@@ -40,10 +41,22 @@ public class Alue {
     public String getAikaleima() {
         return aikaleima;
     }
-    
-    public Integer getViestit() throws Exception{
+
+    public Integer getViestit() throws Exception {
         AlueDao dao = new AlueDao(new Database("jdbc:sqlite:foorumi.db"));
         return dao.countViestit(id);
+    }
+
+    public String getShortnimi() {
+        if (this.nimi.length() > 25) {
+            StringBuilder uusi = new StringBuilder("");
+            for (int i = 0; i < 25; i++) {
+                uusi.append(this.nimi.charAt(i));
+            }
+            uusi.append("...");
+            return uusi.toString();
+        }
+        return nimi;
     }
 
     public void setId(Integer id) {
@@ -62,6 +75,5 @@ public class Alue {
     public String toString() {
         return this.id + " | " + this.nimi + " | " + this.aikaleima;
     }
-    
-    
+
 }
