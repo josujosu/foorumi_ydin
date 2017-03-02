@@ -99,8 +99,11 @@ public class Foorumi {
             String onkotyhja = req.queryParams("otsikko").trim();
             if (!onkotyhja.isEmpty()) {
                 keskusteluDao.save(new Keskustelu(onkotyhja, Integer.parseInt(req.params(":a_id"))));
+                res.redirect("/alueet/" + req.params(":a_id") + "/" + keskusteluDao.findIdWithOtsikko(onkotyhja) + "/1");
+
+            } else {
+                res.redirect("/alueet/" + req.params(":a_id"));
             }
-            res.redirect("/alueet/" + req.params(":a_id") + "/" + keskusteluDao.findIdWithOtsikko(onkotyhja) + "/1");
             return "ok";
         });
 

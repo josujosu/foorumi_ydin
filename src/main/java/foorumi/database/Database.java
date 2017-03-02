@@ -21,8 +21,6 @@ public class Database {
     public Database(String address) throws Exception {
         this.connection = DriverManager.getConnection(address);
         this.databaseAddress = address;
-        
-        //init();
     }
 
     public <T> List<T> queryAndCollect(String query, Collector<T> col, Object... params) throws SQLException {
